@@ -52,7 +52,7 @@ class PhonebookForm extends Component {
           timeout={500}
           unmountOnExit
         >
-          <Alert />
+          <Alert text={"This contact name already use"} />
         </CSSTransition>
         <form className={s.form} onSubmit={this.onHandleSubmit}>
           <label className={s.label}>

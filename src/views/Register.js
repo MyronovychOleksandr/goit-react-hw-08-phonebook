@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { CSSTransition } from "react-transition-group";
 import { authOperations } from "../redux/auth";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
+import Alert from "../components/phonebookForm/alert/Alert";
 
 const styles = {
   form: {
@@ -35,6 +37,14 @@ class Register extends Component {
     const { name, email, password } = this.state;
     return (
       <div>
+        <CSSTransition
+          in={this.props.error}
+          classNames="alert"
+          timeout={500}
+          unmountOnExit
+        >
+          <Alert auth={true} text={"This email already registred"} />
+        </CSSTransition>
         <h2>Register page</h2>
         <form onSubmit={this.handleSubmit} style={styles.form}>
           <label style={styles.label}>
@@ -90,8 +100,11 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+});
 const mapDispatchToProps = {
   onRegister: authOperations.register,
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

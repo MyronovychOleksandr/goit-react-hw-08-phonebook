@@ -19,9 +19,12 @@ const token = createReducer(null, {
 
 const error = createReducer(null, {
   [authActions.registerError]: (_, { payload }) => payload,
+  [authActions.registerSuccess]: () => null,
   [authActions.loginError]: (_, { payload }) => payload,
+  [authActions.loginSuccess]: () => null,
   [authActions.getCurrentUserError]: (_, { payload }) => payload,
   [authActions.logoutError]: (_, { payload }) => payload,
+  [authActions.clearError]: () => null,
 });
 
 export default combineReducers({

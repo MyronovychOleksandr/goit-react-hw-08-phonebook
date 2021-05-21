@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
-import { authOperations } from "../redux/auth";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
+import { authOperations } from "../redux/auth";
+import Alert from "../components/phonebookForm/alert/Alert";
 
 const styles = {
   form: {
@@ -34,6 +36,14 @@ class Login extends Component {
     const { email, password } = this.state;
     return (
       <>
+        <CSSTransition
+          in={this.props.error}
+          classNames="alert"
+          timeout={500}
+          unmountOnExit
+        >
+          <Alert auth={true} text={"Your data is incorrect"} />
+        </CSSTransition>
         <h2>Login page</h2>
         <form onSubmit={this.handleSubmit} style={styles.form}>
           <label style={styles.label}>
@@ -73,4 +83,10 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { onLogin: authOperations.login })(Login);
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+});
+
+export default connect(mapStateToProps, { onLogin: authOperations.login })(
+  Login
+);
