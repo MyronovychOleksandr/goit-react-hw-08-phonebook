@@ -20,13 +20,7 @@ const styles = {
 const UserMenu = ({ name, onLogout }) => {
   return (
     <div style={styles.container}>
-      <img
-        src="https://icon-library.net/images/avatar-icon-images/avatar-icon-images-7.jpg"
-        width="32"
-        style={styles.avatar}
-      />
       <span style={styles.name}>Welcome, {name}</span>
-      {/* <button onClick={onLogout}>Log out</button> */}
       <Button variant="danger" size="sm" onClick={onLogout}>
         Log out
       </Button>
